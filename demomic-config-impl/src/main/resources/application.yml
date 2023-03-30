@@ -2,12 +2,23 @@ spring:
   application:
     name: demomic-config
   profiles:
-    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: classpath:/config
+        git:
+          default-label: master
+          uri: git@github.com:yuraguz/demomic-config.git
+          repos:
+            development:
+              default-label: master
+              pattern:
+                - '*/dev'
+                - '*/default'
+              uri: git@github.com:yuraguz/demomic-properties.git
+              search-paths:
+                - dev
+                - default
 
 server:
   port: 9000
